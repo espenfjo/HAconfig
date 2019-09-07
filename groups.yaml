@@ -1,0 +1,85 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.climate
+    - group.uteclimate
+    - group.upper_floor
+    - group.lower_floor
+    - group.outside
+    - sensor.tomas_alarm
+    - input_select.house_mode_select
+    - input_boolean.good_night_house
+    - sensor.house_mode
+    - group.frysar_temperatur
+    - group.people_status
+    - sensor.occupancy
+    - weather.smhi_hemma
+    - weather.yweather
+    
+tracker_view:
+  view: yes
+  icon: mdi:cellphone-wireless
+  entities:
+    - group.espen_devices
+    - group.marianne_devices
+
+media_view:
+  view: yes
+  icon: mdi:television
+  entities:
+    - group.googlehomes
+    - group.chromecasts
+    - group.kodis
+    - group.remotes
+    - switch.switch8_melkers_tv 
+    - switch.switch7 #KODI switch
+
+ligths_view:
+  view: yes
+  icon: mdi:lightbulb-outline
+  entities:
+    - light.tomas_fonster
+    - switch.switch2
+    - switch.switch3
+    - switch.switch4_tomas_fan
+    - switch.switch5
+    #- switch.ikea2
+    - switch.switch7
+    - switch.switch8
+    - switch.switch10
+    - light.tvrummet  
+
+yoshi_home_alone:
+  view: no
+  entities:
+    - light.stue
+    - light.gang
+
+uteclimate:
+  name: Klima ute
+  view: no
+  icon: mdi:temperature-celsius
+  entities:
+    - sensor.utetemp_temperaturef
+    - sensor.utetemp_humidity
+
+room_view:
+  view: yes
+  icon: mdi:home-circle
+  entities:
+    - group.room_stue
+    - group.room_soverom
+    - group.room_badet
+    - group.room_kontoret
+    - group.room_klesrommet
+    - group.room_kitchen
+
+room_stue:
+  name: Stuen
+  view: no
+  entities:
+    - light.vardagsrum
+    - light.hallen #Hallway
+    - binary_sensor.vardagsrum_pir
+    - binary_sensor.dorr_uppe_magnet

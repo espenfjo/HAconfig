@@ -1,0 +1,19 @@
+homekit:
+  filter:
+    exclude_entities:
+      - light.rwl021_4
+      - light.rwl021_6
+    include_domains:
+      - light
+      - media_player      
+  entity_config:
+    light.gang:
+      name: Lys i gangen      
+    lock.dor:
+      name: Dørlåsen
+    media_player.living_room:
+      feature_list:
+        - feature: on_off
+        - feature: play_pause
+        - feature: play_stop
+        - feature: toggle_mute

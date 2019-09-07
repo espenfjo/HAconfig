@@ -1,0 +1,40 @@
+- platform: template
+  switches:
+    tv:
+      value_template: "{{ is_state_attr('remote.hubben', 'current_activity', 'SE PÅ TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'SE PÅ TV'
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'PowerOff'
+    atv:
+      value_template: "{{ is_state_attr('remote.hubben', 'current_activity', 'WATCH APPLE TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'WATCH APPLE TV'
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'PowerOff'
+    
+    # OFF ACTIVITY
+    poweroff:
+      value_template: "{{ not is_state_attr('remote.hubben', 'current_activity', 'PowerOff') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'PowerOff'
+      turn_off:
+        service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: 'PowerOff'

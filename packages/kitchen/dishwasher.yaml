@@ -1,0 +1,112 @@
+sensor:
+- platform: template
+  sensors:
+    dish_washer_state:
+      friendly_name: "State"
+      value_template: >-
+        {% if (states('sensor.telldus_oppvaskmaskin_power') | float > 0.2) and (states('sensor.telldus_oppvaskmaskin_power') | float < 4.0) %}
+        idle
+        {% elif (states('sensor.telldus_oppvaskmaskin_power') | float >= 10.0) %}
+        washing
+        {% elif (states('sensor.telldus_oppvaskmaskin_power') | float >= 4) and (states('sensor.telldus_oppvaskmaskin_power') | float < 15) %}
+        drying
+        {% else %}
+        off
+        {% endif %}
+
+input_select:
+  dish_washer_status:
+    icon: mdi:dishwasher
+    name: Dish Washer Status
+    options:
+      - "Off"
+      - Idle
+      - Washing
+      - Drying
+      - Finished
+    initial: "Off"
+automation:
+  - alias: Dish Washer - off
+    trigger:
+      - platform: state
+        entity_id: sensor.dish_washer_state
+        to: "off"
+        for:
+          seconds: 10
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: "Off"
+  # Idle. The machine can draw idle power levels during a wash and/or dry cycle so to avoid incorrectly setting to idle
+  # make sure the machine was off first, i.e. not from a Running state.
+  # The condition is to stop the status being set to Idle after power cycling the switch at the end of a cycle.
+  - alias: Dish Washer - idle
+    trigger:
+    - platform: state
+      entity_id: sensor.dish_washer_state
+      from: "off"
+      to: "idle"
+    condition:
+      condition: template
+      value_template: >
+        {% if not is_state('input_select.dish_washer_status', 'Finished') %}
+        true
+        {% endif %}
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: Idle
+
+  # Washing. As the machine's power draw fluctuates greatly during a cycle, ensure that it was previously Idle before
+  # setting Washing state. 
+  # If the machine is switched on and a cycle started between HA polling the plug, immediatley set to Washing. 
+  - alias: Dish Washer - washing
+    trigger:
+    - platform: state
+      entity_id: sensor.dish_washer_state
+      from: "idle"
+      to: "washing"
+    - platform: state
+      entity_id: sensor.dish_washer_state
+      from: "off"
+      to: "washing"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: Washing
+                        
+  - alias: Dish Washer - drying
+    trigger:
+    - platform: state
+      entity_id: sensor.dish_washer_state
+      from: "washing"
+      to: "drying"
+      for:
+        seconds: 5
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: Drying
+
+  # Finished. To ensure the machine has finished, wait for 2 minutes before setting Finished. This is because Idle power levels
+  # can be drawn during a cycle. Furthermore, Finished should only be set once the door is ready to be opened.
+  - alias: Dish Washer - finished
+    trigger:
+    - platform: state
+      entity_id: sensor.dish_washer_state
+      from: "drying"
+      to: "idle"
+      for:
+        minutes: 2
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dish_washer_status
+          option: Finished
+      # - service: notify.telegram
+      #   data:
+      #     message: "Washing machine has finished. It used {{ states.switch.dish_washer_mains.attributes.today_energy_kwh | round(1) }} kWh this cycle."

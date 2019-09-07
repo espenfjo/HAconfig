@@ -1,0 +1,35 @@
+remote:
+  - platform: harmony
+    name: hubben
+    host: 192.168.1.66
+    
+media_player:
+  - platform: plex
+    scan_interval: 1
+    show_all_controls: true
+    use_episode_art: true
+    remove_unavailable_clients: false
+sensor:
+  - platform: plex
+    host: !secret plex_host
+    ssl: true
+    verify_ssl: false
+    token: !secret plex_token
+  - platform: sonarr_upcoming_media
+    api_key: !secret sonarr_api_key
+    host: !secret sonarr_host
+    port: 8989
+    days: 2
+    ssl: false
+    max: 10
+  - platform: plex_recently_added
+    token: !secret plex_token
+    host: !secret plex_host
+    port: 32400
+    ssl: true
+    ssl_cert: true
+    download_images: false
+    max: 10
+    section_types:
+      - movie
+      - show

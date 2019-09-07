@@ -1,0 +1,10 @@
+input_select:
+  house_mode_select:
+    name: House state
+    options:
+      - Day
+      - Night
+      - Evening
+      - Morning
+      - Cleaning
+      - Vacation

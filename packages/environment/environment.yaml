@@ -1,0 +1,67 @@
+# Track the sun
+# air_quality:
+#   - platform: nilu
+#   - platform: norway_air
+
+netatmo:
+ api_key: !secret netatmo_api_key
+ secret_key: !secret netatmo_api_secret 
+ username: !secret netatmo_username
+ password: !secret netatmo_password
+
+# Weather prediction
+sensor:
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+    scan_interval: '00:05:00'
+    monitored_conditions:
+      - temperature
+      - precip_probability
+      - precip_type
+      - humidity
+      - cloud_cover
+      - nearest_storm_distance
+      - precip_intensity
+      - wind_speed
+      - temperature_high
+      - temperature_low
+  - platform: template
+    sensors:
+      sun_elevation:
+        friendly_name: Solhøyde
+        value_template: '{{states.sun.sun.attributes.elevation}}'
+        unit_of_measurement: '°'
+        
+  - platform: yr # Wheather
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+      - humidity
+      - fog
+      - cloudiness
+      - lowClouds
+      - mediumClouds
+      - highClouds
+      - dewpointTemperature
+sun:
+
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+  - platform: met
+
+group:
+  climate:
+    name: Klima
+    view: no
+    entities:
+      - sensor.netatmo_outdoor_module_temperature
+      - sensor.netatmo_outdoor_module_humidity
+      - sun.sun
+      - sensor.yr_symbol
+      - sensor.yr_cloudiness
+      - sensor.yr_wind_speed

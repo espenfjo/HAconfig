@@ -1,0 +1,9 @@
+sensor:
+  - platform: google_travel_time
+    api_key: !secret google_travel_api
+    origin: Martin Borrebekkens vei 25, Norway
+    destination: Langkaia 1, Norway
+    name: Kollektiv til jobb
+    options:
+      mode: transit
+    

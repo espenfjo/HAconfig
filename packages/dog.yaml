@@ -1,0 +1,36 @@
+input_boolean:
+  dog_tv_is_playing:
+    name: Dog TV is playing
+    initial: off
+    icon: mdi:tv
+automation:
+  - alias: Play DOG tv
+    trigger:
+      - platform: state
+        entity_id: input_boolean.dog_tv_is_playing
+        to: "on"
+    action:
+      - service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: "TV"
+      - delay:
+          seconds: 10
+      - service: script.turn_on
+        entity_id: script.media_extractor_test
+  - alias: Stop DOG tv
+    trigger:
+      - platform: state
+        entity_id: input_boolean.dog_tv_is_playing
+        to: "fff"
+    action:
+      - service: remote.turn_on
+        data:
+          entity_id: remote.hubben
+          activity: "PowerOff"
+      - service: script.turn_off
+        entity_id: script.media_extractor_test
+        
+      
+        
+        

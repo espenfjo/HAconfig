@@ -1,0 +1,2094 @@
+anchors:
+  transparent_title: &transparent_title
+    type: 'custom:card-modder'
+    style:
+      --paper-card-background-color: 'rgba(0, 0, 0, 0.0)'
+      --ha-card-box-shadow: 'none'
+      padding: 0px 10px
+      height: 33px
+  cb_spacer_square: &cb_spacer_square
+    type: custom:button-card
+    color_type: blank-card
+    aspect_ratio: 1/1
+  harmony_xbox: &harmony_xbox
+    device: 41644727
+  harmony_nintendo_switch: &harmony_nintendo_switch
+    device: 51055087
+  harmony_wii_u: &harmony_wii_u
+    device: 41644726
+  harmony_playstation: &harmony_playstation
+    device: 41644724
+  harmony_tv: &harmony_tv
+    device: 41644725
+  harmony_computer: &harmony_computer
+    device: 41644728
+  cb_spacer_10px: &cb_spacer_10px
+    type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - width: 10px
+  cb_3x_glow_template_label_base: &cb_3x_glow_template_label_base
+    type: custom:button-card
+    layout: icon_label
+    color: auto
+    aspect_ratio: 1/1
+    show_state: true
+    show_name: true
+    show_label: true
+    styles:
+      grid:
+        - grid-template-rows: 42px auto 42px
+        - grid-template-columns: 42px auto
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+      icon:
+        - height: 30px
+        - width: 30px
+      name:
+        - justify-self: start
+        - padding: 0px 10px
+        - font-size: 13px
+      label:
+        - align-self: end
+        - padding: 7px
+        - font-size: 11px
+        - font-weight: bold
+        - font-family: Helvetica
+      state:
+        - font-size: 11px
+        - font-family: Helvetica
+        - text-transform: capitalize
+        - font-weight: bold
+        - align-self: end
+        - justify-self: start
+        - padding: 9px 10px
+      lock:
+        - align-items: flex-end
+    tap_action:
+      action: toggle
+  cb_remote_spacer_76px: &cb_remote_spacer_76px
+    type: custom:button-card
+    color_type: blank-card
+    styles:
+      card:
+        - width: 76px
+        - margin: 5px 5px 0px 0px
+  cb_remote_icon_only: &cb_remote_icon_only
+    type: custom:button-card
+    show_state: false
+    show_name: false
+    show_label: false
+    aspect_ratio: 1/1
+    styles:
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+      icon:
+        - height: 35px
+        - width: 35px
+    tap_action:
+      action: toggle
+      
+  # 5 BUTTONS PER ROW - USER SET - IMAGE
+      
+  cb_remote_image_name: &cb_remote_image_name
+    type: "custom:button-card"
+    layout: icon_label
+    aspect_ratio: 1/1
+    show_state: false
+    show_name: true
+    show_label: false
+    show_icon: false
+    show_entity_picture: true
+    
+  # 4 BUTTONS PER ROW - GRID AND NAME STYLES
+  
+  cb_remote_image_grid_name_styles: &cb_remote_image_grid_name_styles
+    grid:
+      - grid-template-rows: 50px auto 0px
+      - grid-template-columns: 50px auto
+    name:
+      - justify-self: start
+      - align-self: end
+      - padding: 9px 10px
+      - font-size: 12px
+
+  # 4 BUTTONS PER ROW - XBOX IMAGE STYLES
+
+  cb_remote_image_xbox_styles: &cb_remote_image_xbox_styles
+    <<: *cb_remote_image_grid_name_styles
+    entity_picture:
+      - height: 50px
+      - width: 50px
+
+  # 4 BUTTONS PER ROW - XBOX A BUTTON STYLE
+
+  cb_remote_xbox_a: &cb_remote_xbox_a
+    styles:
+      <<: *cb_remote_image_xbox_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(100, 189, 54)
+
+  # 4 BUTTONS PER ROW - XBOX B BUTTON STYLE
+    
+  cb_remote_xbox_b: &cb_remote_xbox_b
+    styles:
+      <<: *cb_remote_image_xbox_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(255, 24, 43)
+
+  # 4 BUTTONS PER ROW - XBOX Y BUTTON STYLE
+
+  cb_remote_xbox_y: &cb_remote_xbox_y
+    styles:
+      <<: *cb_remote_image_xbox_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(255, 185, 49)
+
+  # 4 BUTTONS PER ROW - XBOX X BUTTON STYLE
+
+  cb_remote_xbox_x: &cb_remote_xbox_x
+    styles:
+      <<: *cb_remote_image_xbox_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(0, 61, 142)
+
+  # 4 BUTTONS PER ROW - PLAYSTAION IMAGE STYLES
+
+  cb_remote_image_ps_styles: &cb_remote_image_ps_styles
+    <<: *cb_remote_image_grid_name_styles
+    entity_picture:
+      - height: 30px
+      - width: 30px
+
+  # 4 BUTTONS PER ROW - PLAYSTAION X BUTTON STYLE
+
+  cb_remote_ps_x: &cb_remote_ps_x
+    styles:
+      <<: *cb_remote_image_ps_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(107, 139, 200)
+
+  # 4 BUTTONS PER ROW - PLAYSTAION CIRCLE BUTTON STYLE
+    
+  cb_remote_ps_c: &cb_remote_ps_c
+    styles:
+      <<: *cb_remote_image_ps_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(246, 69, 75)
+
+  # 4 BUTTONS PER ROW - PLAYSTAION TRIANGLE BUTTON STYLE
+
+  cb_remote_ps_t: &cb_remote_ps_t
+    styles:
+      <<: *cb_remote_image_ps_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(43, 220, 150)
+
+  # 4 BUTTONS PER ROW - PLAYSTAION SQUARE BUTTON STYLE
+
+  cb_remote_ps_s: &cb_remote_ps_s
+    styles:
+      <<: *cb_remote_image_ps_styles
+      card:
+        - padding: 0px 0px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px rgba(219, 142, 196)
+
+  # 3 BUTTONS PER ROW - POWER BUTTON
+
+  cb_remote_power_on: &cb_remote_power_on
+    <<: *cb_3x_glow_template_label_base
+    state:
+      - value: "on"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px rgba(228, 94, 101)
+          icon:
+            - color: rgba(228, 94, 101)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+      - value: "off"
+        styles:
+          label:
+            - color: rgba(0, 0, 0, 0.0)
+
+  # 3 BUTTONS PER ROW - YAMAHA ZONE BUTTON
+
+  cb_remote_yamaha_zone: &cb_remote_yamaha_zone
+    <<: *cb_remote_power_on
+    label_template: >
+      var mapper = {
+        "switch.zone_1":"input_number.yamaha_receiver",
+        "switch.zone_2":"input_number.yamaha_receiver_zone_2"
+      };
+      var entity_id = mapper[entity.entity_id];
+      var level = Math.round(parseFloat(states[entity_id].state));
+      var muted = entity.attributes.is_volume_muted;
+      if (muted) {
+        return 'muted';
+      }
+      return (level ? level : '0') + ' dB';
+  # 4 BUTTONS PER ROW BASE
+
+  cb_remote_4_base: &cb_remote_4_base
+    type: custom:button-card
+    state:
+      - value: "on"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px var(--button-card-light-color)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+      - value: "off"
+        styles:
+          label:
+            - color: rgba(0, 0, 0, 0.0)
+
+  # 4 BUTTONS PER ROW - ACTIVE - ICON AND LABEL
+
+  cb_remote_icon_label: &cb_remote_icon_label
+    <<: *cb_remote_4_base
+    layout: icon_name
+    show_state: false
+    show_name: false
+    show_label: true
+    aspect_ratio: 1/1
+    color: auto
+    styles:
+      grid:
+        - grid-template-rows: 50px 0px auto
+        - grid-template-columns: 50px auto
+      icon:
+        - height: 30px
+        - width: 30px
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+      label:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+    tap_action:
+      action: toggle
+
+  # 4 BUTTONS PER ROW - ACTIVE - ZONE CONTROL
+
+  cb_remote_zone_control: &cb_remote_zone_control
+    <<: *cb_remote_icon_label
+    label_template: >
+      var control = states['input_select.yamaha_volume_control'].state;
+      if (control === 'all') {
+        var ret = 'all zones';
+      } else {
+        var zone = parseInt(control, 0);
+        var ret = (zone === 0 ? 'off' : 'zone '+zone.toString());
+      }
+      return ret;
+  # 4 BUTTONS PER ROW - ACTIVE - HARMONY SERVICE
+
+  cb_remote_harmony_command: &cb_remote_harmony_command
+    <<: *cb_remote_4_base
+    layout: icon_state
+    color: var(--paper-item-icon-active-color)
+    aspect_ratio: 1/1
+    show_state: false
+    show_name: true
+    show_label: false
+    styles:
+      grid:
+        - grid-template-rows: 50px auto 0px 
+        - grid-template-columns: 50px auto
+      icon:
+        - height: 30px
+        - width: 30px
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+
+  # 4 BUTTONS PER ROW - ACTIVE - HARMONY SERVICE
+
+  cb_remote_run_script: &cb_remote_run_script
+    type: custom:button-card
+    layout: icon_state
+    show_state: false
+    show_name: true
+    show_label: false
+    styles:
+      grid:
+        - grid-template-rows: 42px auto 0px 
+        - grid-template-columns: 42px auto
+      icon:
+        - height: 30px
+        - width: 30px
+      card:
+        - border-radius: 15px
+        - height: 76px
+        - width: 76px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - box-shadow: 0px 0px 3px 1px var(--paper-item-icon-active-color)
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+    state:
+      - value: "on"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+      - value: "off"
+        styles:
+          label:
+            - color: rgba(0, 0, 0, 0.0)
+
+  # 4 BUTTONS PER ROW - ACTIVE - HARMONY SERVICE
+
+  cb_remote_run_script_small: &cb_remote_run_script_small
+    type: custom:button-card
+    layout: icon_state
+    show_state: false
+    show_name: true
+    show_label: false
+    styles:
+      grid:
+        - grid-template-rows: 42px auto 0px 
+        - grid-template-columns: 42px auto
+      icon:
+        - height: 30px
+        - width: 30px
+      card:
+        - border-radius: 15px
+        - height: 64px
+        - width: 64px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - box-shadow: 0px 0px 3px 1px var(--paper-item-icon-active-color)
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+    state:
+      - value: "on"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+      - value: "off"
+        styles:
+          label:
+            - color: rgba(0, 0, 0, 0.0)
+          card:
+            - box-shadow: 0px 0px 3px 1px var(--paper-item-icon-active-color)
+
+  # 4 BUTTONS PER ROW - FAKE ACTIVE - FOR TEXT AS ICON BUTTONS, LIKE "OK"
+
+  cb_remote_name_as_icon: &cb_remote_name_as_icon
+    type: custom:button-card
+    layout: icon_state
+    color: var(--paper-item-icon-active-color)
+    aspect_ratio: 1/1
+    show_icon: false
+    show_state: false
+    show_name: true
+    show_label: true
+    styles:
+      grid:
+        - grid-template-rows: 0px 50px auto 
+        - grid-template-columns: 50px auto
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+      name:
+        - width: 50px
+        - justify-self: start
+        - align-self: center
+        - color: var(--paper-item-icon-active-color)
+        - font-weight: bold
+        - font-size: 24px
+        - text-transform: capitalize
+      label:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+
+  # 76 x 165 GLOW - ACTIVE - AMAZON ECHO SPEAKER OUTPUT
+
+  cb_remote_speaker: &cb_remote_speaker
+    type: "custom:button-card"
+    layout: icon_state
+    color: auto
+    aspect_ratio: 2/1
+    show_state: false
+    show_name: true
+    show_label: false
+    styles:
+      grid:
+        - grid-template-rows: 50px auto 0px
+        - grid-template-columns: 50px auto
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+      icon:
+        - height: 30px
+        - width: 30px
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - text-transform: capitalize
+    tap_action:
+      action: toggle
+
+  # ACTIVE STATE ON
+
+  cb_remote_state_on_style: &cb_remote_state_on_style
+    state:
+      - value: "on"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+
+  # ACTIVE STATE OFF - MAKES THE BUTTON "ON" WHEN OFF.
+
+  cb_remote_state_off_style: &cb_remote_state_off_style
+    state:
+      - value: "off"
+        styles:
+          card:
+            - --paper-card-background-color: rgba(40, 40, 40)
+            - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+          name:
+            - color: white
+          state:
+            - color: white
+          label:
+            - color: white
+          icon:
+            - color: var(--paper-item-icon-active-color)
+      - value: "on"
+        styles:
+          icon: 
+            - color: var(--paper-item-icon-color)
+
+  # 76 x 342 - ACTIVE STATE ALWAYS - MEDIA DESCRIPTION.
+
+  cb_remote_media: &cb_remote_media
+    type: "custom:button-card"
+    layout: icon_label
+    color: auto
+    aspect_ratio: 4/1
+    show_state: false
+    show_name: true
+    show_label: true
+    icon: mdi:music-note
+    label_template: >
+      var playing = states['media_player.living_room_dot'].state === 'playing';
+      if (playing) {
+        var title = states['media_player.living_room_dot'].attributes.media_title;
+        return `Title: ${title}`;
+      }
+      return `Title: `;
+    name_template: >
+      var playing = states['media_player.living_room_dot'].state === 'playing';
+      if (playing) {
+        var artist = states['media_player.living_room_dot'].attributes.media_artist;
+        return `Artist: ${artist}`;
+      }
+      return `Artist: `;
+    styles:
+      grid:
+        - grid-template-rows: 1fr 1fr 0px
+        - grid-template-columns: 50px auto
+      card:
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - --paper-card-background-color: rgba(40, 40, 40)
+        - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+      icon:
+        - color: var(--paper-item-icon-active-color)
+        - height: 30px
+        - width: 30px
+      name:
+        - font-size: 12px
+        - color: white
+        - padding:  2px 0px 0px 70px
+        - text-transform: capitalize
+        - justify-self: start
+        - align-self: start
+      label:
+        - text-transform: capitalize
+        - padding: 0px 0px 2px 20px 
+        - font-size: 12px
+        - justify-self: start
+        - color: white
+        - text-align: start
+        - align-self: end
+    tap_action:
+      action: toggle
+
+  remote_button: &buttonremote
+    type: entity-button
+    show_name: false
+    tap_action:
+      action: toggle
+    hold_action:
+      action: none
+
+path: funkerlitt
+title: Home
+icon: 'mdi:home'
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: picture-glance
+            title: ''
+            entities:
+              - device_tracker.espen_presence
+            state_image:
+              "home": /local/img/espen.jpg
+              "not_home": /local/img/espen_away.jpg
+            entity: group.espen_devices
+          - type: picture-glance
+            title: ''              
+            entities:
+              - device_tracker.marianne_presence
+            state_image:
+              "home": /local/img/marianne.jpg
+              "not_home": /local/img/marianne_away.jpg
+            entity: group.marianne_devices
+      - type: entities
+        entities:
+          - sensor.kollektiv_til_jobb
+      - type: conditional
+        conditions:
+          - entity: media_player.plex_stua
+            state_not: "off"
+        card:
+          type: custom:mini-media-player
+          entity: media_player.plex_stua
+          icon: mdi:television
+          artwork: cover
+  - type: horizontal-stack
+    cards:
+      - type: custom:button-card
+        entity: remote.hubben
+        name: TV
+        icon: mdi:television
+        tap_action:
+          action: more-info
+      - type: custom:button-card
+        entity: group.all_lights
+      # - type: custom:button-card
+      #   entity: lock.dor
+      #   name: Døra
+      #   color: rgb(181, 142, 49)
+      #   state:
+      #     - value: "off"
+      #       color: rgb(255, 0, 0)
+      #   tap_action:
+      #     action: more-info
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.stua
+            name: Lys i stua
+          - type: light
+            entity: light.gangen
+            name: Lys i gangen
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: group.yoshi_home_alone
+            name: Yoshi hjemme alene
+            icon: mdi:dog
+      - type: horizontal-stack
+        cards:
+          - type: thermostat
+            name: Badet
+            entity: climate.thermofloor_as_heatit_thermostat_tf_056_energy_heat
+      - type: horizontal-stack
+        cards:
+          - type: thermostat
+            name: Stua
+            entity: climate.livingroom
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.stue_temperature
+            show:
+              extrema: true
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.netatmo_indoor_humidity
+                name: Luftfuktighet                  
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.netatmo_indoor_co2
+                name: CO2
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.badet_temperature
+            show:
+              extrema: true
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.badet_humidity
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.soverom_temperature
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.soverom_humidity
+      - type: horizontal-stack
+        cards:
+          - type: custom:miflora-card
+            title: 'Ficus Benjamina Espen'
+            image: images/ficus.jpg
+            min_moisture: 15
+            max_moisture: 60
+            min_conductivity: 350
+            min_temperature: 12
+            entities:
+              - moisture:sensor.xiaomi_miflora_moisture_ficus_espen
+              - intensity:sensor.xiaomi_miflora_illuminance_ficus_espen
+              - temperature:sensor.xiaomi_miflora_temperature_ficus_espen
+              - conductivity:sensor.xiaomi_miflora_soil_conductivity_ficus_espen
+              - battery:sensor.xiaomi_miflora_battery_level_ficus_espen
+      - type: horizontal-stack
+        cards:
+          - type: custom:miflora-card
+            title: 'Ficus Benjamina Marianne'
+            image: images/ficus.jpg
+            min_moisture: 15
+            max_moisture: 60
+            min_conductivity: 350
+            min_temperature: 12
+            entities:
+              - moisture:sensor.xiaomi_miflora_moisture_ficus_marianne
+              - intensity:sensor.xiaomi_miflora_illuminance_ficus_marianne
+              - temperature:sensor.xiaomi_miflora_temperature_ficus_marianne
+              - conductivity:sensor.xiaomi_miflora_soil_conductivity_ficus_marianne
+              - battery:sensor.xiaomi_miflora_battery_level_ficus_marianne
+  - type: vertical-stack
+    cards:
+      - type: custom:simple-weather-card
+        entity: weather.home
+        name: " "
+        secondary_info: humidity
+        custom:
+          - temp: sensor.dark_sky_temperature
+          # - high: sensor.dark_sky_temperature_high
+          # - low: sensor.dark_sky_temperature_low
+        backdrop:
+          day: "#2980b9"
+          night: "#022F4C"
+      - type: weather-forecast
+        entity: weather.dark_sky
+
+# path: livingroom
+# title: Living Room
+# icon: 'mdi:sofa'
+# badges: []
+# cards:
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.living_room_thermostat_temperature
+#             name: Living Room
+#             line_color: '#2980b9'
+#             line_width: 2
+#       - type: horizontal-stack
+#         cards:
+#           - type: light
+#             entity: light.stue
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.living_room_thermostat_humidity
+#             name: Humidity
+#             line_color: '#b58e31'
+#             line_width: 4
+#             hours_to_show: 24
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: entity-button
+#             entity: switch.living_room_fan
+#             name: Ceiling Fan
+#             icon: mdi:fan
+#             tap_action:
+#               action: toggle
+#           - type: entity-button
+#             entity: switch.outside_lights
+#             name: Patio Lights
+#             icon: mdi:lightbulb
+#             tap_action:
+#               action: toggle
+#   - type: vertical-stack
+#     cards:
+#       - type: glance
+#         entities:
+#           - binary_sensor.door_window_sensor_158d00023eb0bb
+#           - binary_sensor.motion_sensor_158d0002047afe
+#       - type: custom:mini-media-player
+#         entity: media_player.plex_stua
+#         icon: mdi:television
+#         artwork: cover
+#       - type: custom:mini-media-player
+#         entity: media_player.living_room_speaker
+#         icon: mdi:google-home
+#         artwork: cover
+#         show_tts: google
+#   - title: Neato Vacuum
+#     type: picture-entity
+#     entity: vacuum.rosie
+#     image: /local/images/neato2.png
+# path: bedroom
+# title: Bedroom
+# icon: 'mdi:hotel'
+# badges: []
+# cards:
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - entity: sensor.bedroom_temp
+#                 name: Bedroom
+#               - sensor.bathroom_temperature_f
+#             name: Bedroom
+#             legend: false
+#             line_color: '#2980b9'
+#             line_width: 4
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.bedroom_humidity
+#             name: Humidity
+#             line_color: '#b93829'
+#             line_width: 4
+#       - type: horizontal-stack
+#         cards:
+#           - type: light
+#             entity: light.bedroom
+#           - type: light
+#             entity: light.bathroom
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: entity-button
+#             entity: switch.bedroom_fan
+#             name: Bedroom Fan
+#             icon: mdi:fan
+#             tap_action:
+#               action: toggle
+#           - type: glance
+#             entities:
+#               - sensor.bathroom_battery
+#       - type: horizontal-stack
+#         cards:
+#           - type: glance
+#             entities:
+#               - binary_sensor.motion_sensor_158d000237a64a
+#               - binary_sensor.bathroom_motion
+#               - binary_sensor.motion_sensor_158d00031b4c8a
+#   - type: vertical-stack
+#     cards:
+#       - type: custom:mini-media-player
+#         entity: media_player.bedroom_tv
+#         icon: mdi:television
+#         artwork: cover
+#       - type: custom:mini-media-player
+#         entity: media_player.bedroom_speaker
+#         icon: mdi:google-home
+#         artwork: cover
+#         show_tts: google
+
+# path: office
+# title: Office
+# icon: 'mdi:keyboard'
+# badges: []
+# cards:
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.office_temperature_f
+#             name: Office
+#             line_color: '#2980b9'
+#             line_width: 2
+#       - type: horizontal-stack
+#         cards:
+#           - type: light
+#             entity: light.office
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.office_lux
+#             name: Illumination
+#             line_color: '#b58e31'
+#             line_width: 4
+#             hours_to_show: 24
+#   - type: horizontal-stack
+#     cards:
+#       - type: entity-button
+#         entity: switch.office_fan
+#         name: Office Fan
+#         icon: mdi:fan
+#         tap_action:
+#           action: toggle
+#       - type: entity-button
+#         entity: switch.smart_plug_one
+#         name: Air Freshener
+#         icon: mdi:flower
+#         tap_action:
+#           action: toggle
+#   - type: vertical-stack
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: glance
+#             entities:
+#               - binary_sensor.office_motion
+#               - sensor.office_battery
+#               - sensor.steam_76561197976250572
+#               - sensor.laptop_socket
+#   - type: custom:mini-media-player
+#     entity: media_player.office_speaker
+#     icon: mdi:google-home
+#     artwork: cover
+#     show_tts: google
+
+# path: settings
+# title: Settings
+# icon: 'mdi:settings'
+# badges: []
+# cards:
+#   - type: vertical-stack
+#     title: System
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.processor_use
+#             name: CPU
+#             line_color: '#2980b9'
+#             line_width: 2
+#             hours_to_show: 24
+#       - type: vertical-stack
+#         cards:
+#           - type: custom:bar-card
+#             entity: sensor.disk_use_percent_home
+#             title: HDD
+#             title_position: inside
+#             align: split
+#             show_icon: true
+#             color: '#00ba6a'
+#           - type: custom:bar-card
+#             entity: sensor.memory_use_percent
+#             title: RAM
+#             title_position: inside
+#             align: split
+#             show_icon: true
+#           - type: entities
+#             entities:
+#               - sensor.last_boot
+
+#   - type: vertical-stack
+#     title: Network
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.speedtest_download
+#             name: Download
+#             line_color: '#2980b9'
+#             line_width: 6
+#             hours_to_show: 24
+#             icon: mdi:download-network
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.speedtest_upload
+#             name: Upload
+#             line_color: '#2980b9'
+#             line_width: 6
+#             hours_to_show: 24
+#             icon: mdi:upload-network
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.speedtest_ping
+#             name: Ping
+#             line_color: '#dbdfe2'
+#             line_width: 6
+#             hours_to_show: 24
+#             icon: mdi:server-network
+
+#   - type: vertical-stack
+#     title: Pi-Hole
+#     cards:
+#       - type: horizontal-stack
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.pi_hole_ads_blocked_today
+#             name: Ads Blocked Today
+#             line_color: '#2980b9'
+#             line_width: 4
+#             hours_to_show: 24
+#           - type: custom:mini-graph-card
+#             entities:
+#               - sensor.pi_hole_ads_percentage_blocked_today
+#             name: Percentage Blocked
+#             line_color: '#2980b9'
+#             line_width: 4
+#             hours_to_show: 24
+#       - type: vertical-stack
+#         cards:
+#           - type: custom:bar-card
+#             entity: sensor.pi_hole_dns_queries_today
+#             title: DNS Queries Today
+#             title_position: inside
+#             align: split
+#             show_icon: true
+#             color: '#00ba6a'
+#             max: '30000'
+#           - type: custom:bar-card
+#             entity: sensor.pi_hole_domains_blocked
+#             title: Domains Blocked
+#             title_position: inside
+#             align: split
+#             show_icon: true
+#             max: '2000000'
+#             icon: mdi:cancel
+
+# path: room
+# title: Room Location
+# icon: 'mdi:home-account'
+# badges: []
+# cards:
+#   - title: BT RSSI
+#     type: entities
+#     entities:
+#       - sensor.bedroom_sean_gh_rssi
+#       - sensor.livingroom_sean_gh_rssi
+#       - sensor.office_sean_gh_rssi
+#       - sensor.bedroom_emily_gh_rssi
+#       - sensor.livingroom_emily_gh_rssi
+#       - sensor.office_emily_gh_rssi
+#     show_header_toggle: false
+#   - title: Input Booleans
+#     type: entities
+#     entities:
+#       - input_boolean.bedtime_sean
+#       - input_boolean.bedtime_emily
+#       - input_boolean.sean_bedroom_presence
+#       - input_boolean.sean_living_room_presence
+#       - input_boolean.sean_office_presence
+#       - input_boolean.emily_bedroom_presence
+#       - input_boolean.emily_living_room_presence
+#       - input_boolean.emily_office_presence
+#     show_header_toggle: false
+
+# path: auto
+# title: Automations
+# icon: 'mdi:creation'
+# badges: []
+# cards:
+#   - title: Home Automations
+#     type: entities
+#     entities:
+#       - automation.away_mode
+#       - automation.lights_on_in_the_evening
+# #          - automation.morning_alarm_lights
+#       - automation.turn_on_air_fresh
+#       - automation.outside_lights_on_at_sunset
+#       - automation.outside_lights_off_at_ten
+#       - automation.reset_volume_on_speakers
+#     show_header_toggle: true
+#   - title: Room Presence
+#     type: entities
+#     entities:
+#       - automation.sean_in_bedroom
+#       - automation.sean_in_living_room
+#       - automation.sean_in_office
+#       - automation.sean_is_away
+#       - automation.emily_in_bedroom
+#       - automation.emily_in_living_room
+#       - automation.emily_in_office
+#       - automation.emily_is_away
+#     show_header_toggle: true
+#   - title: Climate
+#     type: entities
+#     entities:
+#       - automation.nest_home_mode
+# #          - automation.nest_seasonal_tracker
+#       - automation.nest_normal_mode_google_tracker
+#       - automation.sean_winter_preferences
+#       - automation.family_winter_preferences
+#     show_header_toggle: true
+#   - title: Living Room Automations
+#     type: entities
+#     entities:
+#       - automation.living_room_auto_brightness
+#       - automation.living_room_auto_brightness_transition
+#       - automation.living_room_lights_off_no_motion
+#       - automation.turn_off_living_room_lights_above_lux
+#       - automation.door_closed_turn_on_nest
+#       - automation.door_open_turn_off_nest
+#       - automation.turn_off_living_room_fan
+#     show_header_toggle: true
+#   - title: Bedroom Automations
+#     type: entities
+#     entities:
+#       - automation.bedroom_auto_brightness
+#       - automation.bedroom_auto_brightness_transition
+#       - automation.bedroom_lights_off_no_motion
+#       - automation.bathroom_lights_on_motion
+#       - automation.bathroom_lights_on_motion_bedtime
+#       - automation.bathroom_lights_on_motion_early_morning
+#       - automation.bathroom_lights_off_no_motion
+#       - automation.bathroom_lights_off_no_motion_night
+#       - automation.turn_off_bedroom_fan
+#     show_header_toggle: true
+#   - title: Office Automations
+#     type: entities
+#     entities:
+#       - automation.office_auto_brightness
+#       - automation.office_auto_brightness_transition
+#       - automation.turn_on_fan_above_certain_temp
+#       - automation.turn_off_fan_below_certain_temp
+#       - automation.turn_off_office_lights_above_lux
+#       - automation.turn_office_lights_without_motion_one_min
+#     show_header_toggle: true
+#   - title: Media Automations
+#     type: entities
+#     entities:
+#       - automation.media_player_playing
+#       - automation.media_player_stopped
+#       - automation.media_player_paused
+#       - automation.media_player_unpaused
+#       - automation.media_player_pause_to_idle
+#       - automation.bedroom_player_playing
+#       - automation.bedroom_player_stopped
+#       - automation.bedroom_player_paused
+#       - automation.bedroom_player_unpaused
+#       - automation.bedroom_player_pause_to_idle
+#     show_header_toggle: true
+# path: entertainment
+# icon: mdi:television
+# title: Entertainment
+# cards:
+
+#   # Had to add card-loader to avoid a persistent exception when reloading & clearing cache.
+#   - type: custom:card-loader
+#     wait:
+#       - button-card
+#     card:
+#       type: vertical-stack
+#       cards:
+
+#       #########################
+#       # POWER ON OFF CONTROLS #
+#       #########################
+
+#       - type: horizontal-stack
+#         cards:
+#           - <<: *cb_spacer_10px
+
+#           # Harmony Power On Off
+
+#           - <<: *cb_remote_power_on
+#             entity: switch.poweroff
+#             name: Harmony
+
+#           # Zone 1 Power On Off
+
+#           - <<: *cb_remote_yamaha_zone
+#             entity: switch.zone_1
+#             name: Zone 1
+
+#           # Zone 2 Power On Off
+
+#           - <<: *cb_remote_yamaha_zone
+#             entity: switch.zone_2
+#             name: Zone 2
+
+#           - <<: *cb_spacer_10px
+
+#       ####################################
+#       # HARMONY ACTIVITY ON OFF CONTROLS #
+#       ####################################
+
+
+#       - type: horizontal-stack
+#         cards:
+#           - <<: *cb_spacer_10px
+
+#           # Xbox Activity On Off
+
+#           - <<: *cb_remote_icon_only
+#             entity: switch.atv
+#             state:
+#               - value: "on"
+#                 styles:
+#                   card:
+#                     - --paper-card-background-color: rgba(40, 40, 40)
+#                     - box-shadow: 0px 0px 10px 3px rgba(14, 122, 13)
+#                   icon:
+#                     - color: rgba(14, 122, 13)
+
+#           # Playstation Activity On Off
+
+#           - <<: *cb_remote_icon_only
+#             entity: switch.ps4
+#             state:
+#               - value: "on"
+#                 styles:
+#                   card:
+#                     - --paper-card-background-color: rgba(40, 40, 40)
+#                     - box-shadow: 0px 0px 10px 3px rgba(102, 92, 190)
+#                   icon:
+#                     - color: rgba(102, 92, 190)
+
+#           # Wii U Activity On Off
+
+#           - <<: *cb_remote_icon_only
+#             entity: switch.wii_u
+#             state:
+#               - value: "on"
+#                 styles:
+#                   card:
+#                     - --paper-card-background-color: rgba(40, 40, 40)
+#                     - box-shadow: 0px 0px 10px 3px rgba(0, 150, 200)
+#                   icon:
+#                     - color: rgba(0, 150, 200)
+
+#           # Nintendo Switch Activity On Off
+
+#           - <<: *cb_remote_icon_only
+#             entity: switch.switch
+#             state:
+#               - value: "on"
+#                 styles:
+#                   card:
+#                     - --paper-card-background-color: rgba(40, 40, 40)
+#                     - box-shadow: 0px 0px 10px 3px rgba(228, 0, 15)
+#                   icon:
+#                     - color: rgba(228, 0, 15)
+
+#           # TV Activity On Off
+
+#           - <<: *cb_remote_icon_only
+#             entity: switch.tv
+#             state:
+#               - value: "on"
+#                 styles:
+#                   card:
+#                     - --paper-card-background-color: rgba(40, 40, 40)
+#                     - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+
+#           - <<: *cb_spacer_10px
+
+#       ###########################
+#       # CONTEXT VOLUME CONTROLS #
+#       ###########################
+
+#       - type: conditional
+#         conditions:
+#           - entity: binary_sensor.yamaha_receiver
+#             state: 'on'
+#         card:
+#           type: vertical-stack
+#           cards:
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+
+#                 # Zone control changer
+
+#                 - <<: *cb_remote_zone_control
+#                   icon: mdi:volume-high
+#                   entity: switch.yamaha_volume_control
+
+#                 # Volume Up
+
+#                 - <<: *cb_remote_icon_label
+#                   icon: mdi:volume-plus
+#                   entity: switch.yamaha_volume_plus
+#                   label: "Up"
+#                   hold_action:
+#                     action: call-service
+#                     repeat: 250
+#                     service: switch.turn_on
+#                     service_data:
+#                       entity_id: switch.yamaha_volume_plus
+
+#                 # Volume Down
+
+#                 - <<: *cb_remote_icon_label
+#                   icon: mdi:volume-minus
+#                   entity: switch.yamaha_volume_minus
+#                   label: "Down"
+#                   hold_action:
+#                     action: call-service
+#                     repeat: 250
+#                     service: switch.turn_on
+#                     service_data:
+#                       entity_id: switch.yamaha_volume_minus
+
+#                 # Volume Mute
+
+#                 - <<: *cb_remote_icon_label
+#                   icon: mdi:volume-mute
+#                   entity: switch.yamaha_volume_mute
+#                   label: "Mute"
+
+#                 - <<: *cb_spacer_10px
+
+#       ############################
+#       # HARMONY CONTEXT CONTROLS #
+#       ############################
+
+#       - type: conditional
+#         conditions:
+#           - entity: switch.alexa_source
+#             state_not: 'on'
+#           - entity: switch.phone_source
+#             state_not: 'on'
+#         card:
+#           type: vertical-stack
+#           cards:
+
+#             ################
+#             # XBOX BUTTONS #
+#             ################
+#             - type: conditional
+#               conditions:
+#                 - entity: switch.xbox_one
+#                   state: 'on'
+#                 - entity: switch.xbox_source
+#                   state: 'on'
+#               card:
+#                 type: vertical-stack
+#                 cards:
+
+#                   # XBOX ROW 1 Rewind, Play, Pause, FastForward
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+
+#                       # REWIND BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Rewind
+#                         icon: mdi:rewind
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Rewind"
+
+#                       # PLAY BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Play
+#                         icon: mdi:play
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Play"
+
+#                       # PAUSE BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Pause
+#                         icon: mdi:pause
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Pause"
+
+#                       # FASFORWARD BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Forward
+#                         icon: mdi:fast-forward
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "FastForward"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # XBOX ROW 2 Home, Up, Menu
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # HOME BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Home
+#                         icon: mdi:home
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Xbox"
+
+#                       # UP BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Up
+#                         icon: mdi:arrow-up-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "DirectionUp"
+
+#                       # MENU BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Menu
+#                         icon: mdi:xbox-controller-menu
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Menu"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # XBOX ROW 3 Left, Ok, Right
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # LEFT BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Left
+#                         icon: mdi:arrow-left-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "DirectionLeft"
+
+#                       # OK BUTTON
+
+#                       - <<: *cb_remote_name_as_icon
+#                         name: OK
+#                         label: Confirm
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "OK"
+
+#                       # RIGHT BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Right
+#                         icon: mdi:arrow-right-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "DirectionRight"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # XBOX ROW 4 View, Down, OneGuide
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # VIEW BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: View
+#                         icon: mdi:xbox-controller-view
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "View"
+
+#                       # DOWN BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Down
+#                         icon: mdi:arrow-down-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "DirectionDown"
+
+#                       # ONE GUIDE BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: One Guide
+#                         icon: mdi:xbox
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "OneGuide"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # XBOX ROW 5 ABYX
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+
+#                       # A BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Confirm
+#                         entity_picture: /local/images/xbox_a_transparent_2.png
+#                         color: rgba(100, 189, 54)
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "A"
+#                         <<: *cb_remote_xbox_a
+
+#                       # B BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Back
+#                         entity_picture: /local/images/xbox_b_transparent_2.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "B"
+#                         <<: *cb_remote_xbox_b
+
+#                       # Y BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Search
+#                         entity_picture: /local/images/xbox_y_transparent_2.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "Y"
+#                         <<: *cb_remote_xbox_y
+
+#                       # X BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Backspace
+#                         entity_picture: /local/images/xbox_x_transparent_2.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_xbox
+#                             command: "X"
+#                         <<: *cb_remote_xbox_x
+
+#                       - <<: *cb_spacer_10px
+
+
+#             #######################
+#             # PLAYSTATION BUTTONS #
+#             #######################
+#             - type: conditional
+#               conditions:
+#                 - entity: switch.ps4
+#                   state: 'on'
+#                 - entity: switch.playstation_source
+#                   state: 'on'
+#               card:
+#                 type: vertical-stack
+#                 cards:
+
+#                   # PLAYSTATION ROW 1 Rewind, Play, Pause, FastForward
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+
+#                       # REWIND BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Rewind
+#                         icon: mdi:rewind
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Rewind"
+
+#                       # PLAY BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Play
+#                         icon: mdi:play
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Play"
+
+#                       # PAUSE BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Pause
+#                         icon: mdi:pause
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Pause"
+
+#                       # FASFORWARD BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Forward
+#                         icon: mdi:fast-forward
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "FastForward"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # PLAYSTATION ROW 2 Home, Up, Options
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # HOME BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Home
+#                         icon: mdi:home
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "PS"
+
+#                       # UP BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Up
+#                         icon: mdi:arrow-up-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "DirectionUp"
+
+#                       # OPTIONS BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Options
+#                         icon: mdi:menu
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Options"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # PLAYSTATION ROW 3 Left, Ok, Right
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # LEFT BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Left
+#                         icon: mdi:arrow-left-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "DirectionLeft"
+
+#                       # OK BUTTON
+
+#                       - <<: *cb_remote_name_as_icon
+#                         name: OK
+#                         label: Confirm
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "OK"
+
+#                       # RIGHT BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Right
+#                         icon: mdi:arrow-right-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "DirectionRight"
+
+#                       - <<: *cb_spacer_10px
+
+#                   # PLAYSTATION ROW 4 Info, Down, Share
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+#                       - <<: *cb_spacer_square
+
+#                       # INFO BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Info
+#                         icon: mdi:information
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Info"
+
+#                       # DOWN BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Down
+#                         icon: mdi:arrow-down-bold
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "DirectionDown"
+
+#                       # SHARE BUTTON
+
+#                       - <<: *cb_remote_harmony_command
+#                         name: Share
+#                         icon: mdi:share
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Share"
+
+#                       - <<: *cb_spacer_10px
+
+
+#                   # PLAYSTATION ROW 4 X0[]/\
+
+#                   - type: horizontal-stack
+#                     cards:
+#                       - <<: *cb_spacer_10px
+
+#                         # X BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Confirm
+#                         entity_picture: /local/images/playstation_x.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Cross"
+#                         <<: *cb_remote_ps_x
+
+#                         # CIRCLE BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Back
+#                         entity_picture: /local/images/playstation_circle.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Circle"
+#                         <<: *cb_remote_ps_c
+
+#                         # TRIANGLE BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Search
+#                         entity_picture: /local/images/playstation_triangle.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Triangle"
+#                         <<: *cb_remote_ps_t
+
+#                         # SQUARE BUTTON
+
+#                       - <<: *cb_remote_image_name
+#                         name: Backspace
+#                         entity_picture: /local/images/playstation_square.png
+#                         tap_action:
+#                           action: call-service
+#                           service: remote.send_command
+#                           service_data:
+#                             <<: *harmony_playstation
+#                             command: "Square"
+#                         <<: *cb_remote_ps_s
+
+#                       - <<: *cb_spacer_10px
+
+#       ##########################
+#       # ALEXA CONTEXT CONTROLS #
+#       ##########################
+
+#       - type: conditional
+#         conditions:
+#           - entity: switch.alexa_source
+#             state: 'on'
+#           - entity: media_player.living_room_dot
+#             state_not: 'off'
+#         card:
+#           type: vertical-stack
+#           cards:
+#             # Alexa row 1 Speaker selection
+
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+
+#                 # Select Reciever
+
+#                 - <<: *cb_remote_speaker
+#                   <<: *cb_remote_state_on_style
+#                   name: Reciever
+#                   icon: mdi:speaker-bluetooth
+#                   entity: switch.floating_outlet_switch
+
+#                 # Select Echo
+
+#                 - <<: *cb_remote_speaker
+#                   <<: *cb_remote_state_off_style
+#                   icon: mdi:amazon-alexa
+#                   name: Echo
+#                   entity: switch.floating_outlet_switch
+
+#                 - <<: *cb_spacer_10px
+
+#             # Alexa row 2 Current selection
+
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+
+#                 # playing media_next_track
+
+#                 - <<: *cb_remote_media
+
+#                 - <<: *cb_spacer_10px
+
+
+#             # Alexa row 3 Rewind, Play, Pause, FastForward
+
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+
+#                 # REWIND BUTTON
+
+#                 - <<: *cb_remote_harmony_command
+#                   name: Previous
+#                   icon: mdi:rewind
+#                   tap_action:
+#                     action: call-service
+#                     service: media_player.media_previous_track
+#                     service_data:
+#                       entity_id: media_player.living_room_dot
+
+#                 # PLAY BUTTON
+
+#                 - <<: *cb_remote_harmony_command
+#                   name: Play
+#                   icon: mdi:play
+#                   tap_action:
+#                     action: call-service
+#                     service: media_player.media_play
+#                     service_data:
+#                       entity_id: media_player.living_room_dot
+
+#                 # PAUSE BUTTON
+
+#                 - <<: *cb_remote_harmony_command
+#                   name: Pause
+#                   icon: mdi:pause
+#                   tap_action:
+#                     action: call-service
+#                     service: media_player.media_pause
+#                     service_data:
+#                       entity_id: media_player.living_room_dot
+
+#                 # FASFORWARD BUTTON
+
+#                 - <<: *cb_remote_harmony_command
+#                   name: Next
+#                   icon: mdi:fast-forward
+#                   tap_action:
+#                     action: call-service
+#                     service: media_player.media_next_track
+#                     service_data:
+#                       entity_id: media_player.living_room_dot
+
+#                 - <<: *cb_spacer_10px
+
+#       ##########################
+#       # YAMAHA SOURCE CONTROLS #
+#       ##########################
+
+#       - type: conditional
+#         conditions:
+#           - entity: binary_sensor.yamaha_receiver
+#             state: 'on'
+#         card:
+#           type: vertical-stack
+#           cards:
+#             - <<: *transparent_title
+#               card:
+#                 type: markdown
+#                 content: "#### Source"
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.xbox_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px rgba(14, 122, 13)
+#                         icon:
+#                           - color: rgba(14, 122, 13)
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.playstation_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px rgba(102, 92, 190)
+#                         icon:
+#                           - color: rgba(102, 92, 190)
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.wii_u_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px rgba(0, 150, 200)
+#                         icon:
+#                           - color: rgba(0, 150, 200)
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.nintendo_switch_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px rgba(228, 0, 15)
+#                         icon:
+#                           - color: rgba(228, 0, 15)
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.phone_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+#                 - <<: *cb_spacer_10px
+#             - type: horizontal-stack
+#               cards:
+#                 - <<: *cb_spacer_10px
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.pc_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+#                 - <<: *cb_remote_icon_only
+#                   entity: switch.alexa_source
+#                   state:
+#                     - value: "on"
+#                       styles:
+#                         card:
+#                           - --paper-card-background-color: rgba(40, 40, 40)
+#                           - box-shadow: 0px 0px 10px 3px var(--paper-item-icon-active-color)
+#                 - <<: *cb_spacer_square
+#                 - <<: *cb_spacer_square
+#                 - <<: *cb_spacer_square
+#                 - <<: *cb_spacer_10px
+
+   

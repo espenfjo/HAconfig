@@ -1,0 +1,71 @@
+group:
+  people_status:
+    name: Hjemmestatus
+    entities:
+      - device_tracker.marianne_presence
+      - device_tracker.espen_presence
+
+  presence:
+    name: Enhetsstatus
+    view: no
+    icon: mdi:home-account
+    entities:
+      - group.espen_devices
+      - group.marianne_devices
+
+  espen_devices:
+    name: Espen trackers
+    view: no
+    entities:
+      - device_tracker.huawei_mate_20_pro_767eca_2
+
+  marianne_devices:
+    name: Marianne trackers
+    view: no
+    entities:
+      - device_tracker.MarianniniPhone_2
+
+device_tracker:
+  - platform: unifi
+    host: !secret unifi_host
+    username: !secret unifi_user
+    password: !secret unifi_pass
+    detection_time: 40
+    verify_ssl: False
+    monitored_conditions:
+      - rssi
+      - powersave_enabled
+      - signal
+    ssid_filter:
+      - !secret unifi_ssid1
+      - !secret unifi_ssid2
+  - platform: ping
+    hosts:
+      espen_ping: 192.168.1.225
+      marianne_ping: 192.168.1.247
+  - platform: composite
+    name: espen_presence
+    time_as: device_or_local
+    entity_id:
+      - device_tracker.huawei_mate_20_pro_767eca_2
+  - platform: composite
+    name: marianne_presence
+    time_as: device_or_local
+    entity_id:
+      - device_tracker.MarianniniPhone_2
+sensor:
+  - platform: template
+    sensors:
+      people_home_count:
+        entity_id: 
+          - person.espen
+          - person.marianne
+        value_template: >-
+          {% set count = 0 %}
+          {% if is_state("person.espen", "home") %}
+            {% set count = count + 1 %}
+          {% endif %}
+          {% if is_state("ls -lperson.marianne", "home") %}
+            {% set count = count + 1 %}
+          {% endif %}
+          {{count}}

@@ -1,0 +1,141 @@
+cloud:
+config:
+conversation:
+hassio:
+discovery:
+  enable:
+    - harmony
+    - homekit
+    - apple_tv    
+hacs:
+  token: !secret github_token
+counter:
+  soppla:
+    name: Søppla visits
+    step: 1
+input_number:
+  soppla_persistence:
+    name: Søppla persistence
+    min: 0
+    max: 50
+    step: 1
+    mode: box
+history:
+breaking_changes:
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 132
+  unit_system: metric
+  time_zone: Europe/Oslo
+  customize: !include customize.yaml
+  customize_glob: !include customglob.yaml
+  packages: !include_dir_named packages
+  # auth_providers:
+  #   - type: homeassistant
+    # - type: trusted_networks
+    #   trusted_networks:
+    #     - 192.168.1.0/24
+http:
+  ip_ban_enabled: False
+  login_attempts_threshold: 3
+  use_x_forwarded_for: True
+  trusted_proxies: !secret trusted_proxy
+  base_url: https://hass.mrfjo.org
+hue:
+# logger:
+#   default: debug
+#   logs:
+#     homeassistant.core: info
+#     homeassistant.auth: debug
+#     homeassistant.components.frontend: debug
+lock:
+  - platform: doorman
+    access_token: !secret yale_token
+    id: 1
+    username: !secret yale_username
+    password: !secret yale_password
+logbook:
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - device_tracker.netatmo_personal_weather_statio
+      - sensor.fibaro_system_fgwpe_f_wall_plug_gen5_exporting
+      - sensor.fibaro_system_fgwpe_f_wall_plug_gen5_alarm_type
+      - sensor.fibaro_system_fgwpe_f_wall_plug_gen5_alarm_level
+      - sensor.fibaro_system_fgwpe_f_wall_plug_gen5_sourcenodeid
+      - sensor.fibaro_system_fgwpe_f_wall_plug_gen5_power_management
+    domains:
+      - air_quality
+lovelace:
+  mode: yaml
+map:
+panel_custom:
+  - name: floorplan
+    sidebar_title: Alarm Panel
+    sidebar_icon: mdi:security-home
+    url_path: floorplan
+    config:
+      hide_app_toolbar:
+      config: /local/custom_ui/floorplan/floorplan.yaml
+  - name: zwavegraph2
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:access-point-network
+    url_path: zwave
+  - name: no-more-love
+    sidebar_title: No more love
+    sidebar_icon: mdi:heart-off
+    webcomponent_path: /local/custom_ui/no-love.html
+
+person:
+  - name: Espen
+    id: espentracker
+    device_trackers:
+      - device_tracker.espen_presence
+  - name: Marianne
+    id: mariannetracker
+    device_trackers:
+      - device_tracker.marianne_presence
+influxdb:
+  database: homeassistant
+  username: !secret influx_user
+  password: !secret influx_pass
+stream:
+ssdp:
+system_health:
+updater:  
+  include_used_components: true
+zeroconf:
+media_extractor:
+  default_query: best
+recorder:
+  db_url: !secret dburl
+  purge_keep_days: 30
+  purge_interval: 1
+
+frontend:
+  javascript_version: latest
+  extra_html_url:
+    - /local/custom_ui/state-card-custom-ui.html
+  extra_html_url_es5:
+    - /local/custom_ui/state-card-custom-ui-es5.html
+  themes: !include_dir_named themes
+
+zwave:
+  usb_path: /dev/ttyACM1
+    
+grocy:
+  url: !secret grocy_api
+  api_key: !secret grocy_api_key
+  sensor:
+    - enabled: true
+ 
+group: !include groups.yaml
+script: !include scripts.yaml
+switch: !include switch.yaml
+binary_sensor: !include binary_sensors.yaml
+sensor: !include sensors.yaml
+

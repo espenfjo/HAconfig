@@ -1,0 +1,8 @@
+climate:
+  - platform: generic_thermostat
+    name: Livingroom
+    heater: switch.oljeovn
+    target_sensor: sensor.stue_temperatur
+    away_temp: 14
+
+    

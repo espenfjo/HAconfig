@@ -1,0 +1,128 @@
+### washing_machine.yaml
+sensor:
+- platform: template
+  sensors:
+    washing_machine_state:
+      friendly_name: "State"
+      value_template: >-
+        {% if (states('sensor.fibaro_vaskemaskin_power') | float > 0.2) and (states('sensor.fibaro_vaskemaskin_power') | float < 3.0) %}
+        idle
+        {% elif (states('sensor.fibaro_vaskemaskin_power') | float > 3.0) and (states('sensor.fibaro_vaskemaskin_power') | float < 200.0) %}
+        running
+        {% elif (states('sensor.fibaro_vaskemaskin_power') | float > 200.0) and (states('sensor.fibaro_vaskemaskin_power') | float < 1550.0) %}
+        drying
+        {% elif (states('sensor.fibaro_vaskemaskin_power') | float > 1550.0) %}
+        washing
+        {% else %}
+        off
+        {% endif %}
+
+input_select:
+  washing_machine_status:
+    icon: mdi:washing-machine
+    name: Washing Machine Status
+    options:
+      - "Off"
+      - Idle
+      - Running
+      - Washing
+      - Drying
+      - Finished
+    initial: "Off"
+automation:
+  - alias: Washing machine - off
+    trigger:
+      - platform: state
+        entity_id: sensor.washing_machine_state
+        to: "off"
+        for:
+          seconds: 10
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: "Off"
+  # Idle. The machine can draw idle power levels during a wash and/or dry cycle so to avoid incorrectly setting to idle
+  # make sure the machine was off first, i.e. not from a Running state.
+  # The condition is to stop the status being set to Idle after power cycling the switch at the end of a cycle.
+  - alias: Washing machine - idle
+    trigger:
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "off"
+      to: "idle"
+    condition:
+      condition: template
+      value_template: >
+        {% if not is_state('input_select.washing_machine_status', 'Finished') %}
+        true
+        {% endif %}
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Idle
+
+  # Washing. As the machine's power draw fluctuates greatly during a cycle, ensure that it was previously Idle before
+  # setting Washing state. 
+  # If the machine is switched on and a cycle started between HA polling the plug, immediatley set to Washing. 
+  - alias: Washing machine - running
+    trigger:
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "idle"
+      to: "running"
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "off"
+      to: "running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Running
+              
+  - alias: Washing machine - washing
+    trigger:
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "running"
+      to: "washing"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Washing
+          
+  - alias: Washing machine - drying
+    trigger:
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "running"
+      to: "drying"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Drying
+
+  # Finished. To ensure the machine has finished, wait for 2 minutes before setting Finished. This is because Idle power levels
+  # can be drawn during a cycle. Furthermore, Finished should only be set once the door is ready to be opened.
+  - alias: Washing machine - finished
+    trigger:
+    - platform: state
+      entity_id: sensor.washing_machine_state
+      from: "running"
+      to: "idle"
+      for:
+        minutes: 2
+    action:
+      # - service: switch.turn_off
+      #   entity_id: switch.washing_machine_mains
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: Finished
+      # - service: notify.telegram
+      #   data:
+      #     message: "Washing machine has finished. It used {{ states.switch.washing_machine_mains.attributes.today_energy_kwh | round(1) }} kWh this cycle."

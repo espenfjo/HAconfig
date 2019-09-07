@@ -1,0 +1,45 @@
+media_player.chrome:
+  friendly_name: Plex
+sensor.work_commute_time:
+  icon: mdi:map-clock
+sensor.plex:
+  friendly_name: Plex Activity
+  icon: mdi:plex
+device_tracker.marianne_presence:
+  friendly_name: Marianne tracker
+  entity_picture: /local/img/marianne.jpg
+device_tracker.espen_presence:
+  friendly_name: Espen tracker
+  entity_picture: /local/img/espen.jpg
+device_tracker.huawei_mate_20_pro_767eca:
+  friendly_name: Espen mobil WiFi
+  entity_picture: /local/img/espen.jpg
+device_tracker.MarianniniPhone:
+  friendly_name: Marianne mobil WiFi
+  entity_picture: /local/img/marianne.jpg
+sensor.netatmo_outdoor_module_temperature:
+  friendly_name: Temperatur balkong
+sensor.netatmo_outdoor_module_humidity:
+  friendly_name: Luftfuktighet balkong
+sensor.badet_humidity:
+  friendly_name: Luftfuktighet badet
+sensor.badet_temperature:
+  friendly_name: Temperatur badet
+sensor.soverom_humidity:
+  friendly_name: Luftfuktighet soverom
+sensor.soverom_temperature:
+  friendly_name: Temperatur soverom
+sensor.stue_temperature:
+  friendly_name: Temperatur stue
+sensor.stue_humidity:
+  friendly_name: Luftfuktighet stue
+sensor.yr_symbol:
+  friendly_name: Vær
+sensor.yr_cloudiness:
+  friendly_name: Overskyet
+sensor.yr_wind_speed:
+  friendly_name: Vindhastighet
+group.espen_devices:
+  friendly_name: Espen mobil
+group.marianne_devices:
+  friendly_name: Marianne mobil

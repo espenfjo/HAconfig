@@ -1,0 +1,16 @@
+sensor:
+  - platform: statistics
+    name: Bathroom Humidity Stats
+    entity_id: sensor.badet_luftfuktighet
+    sampling_size: 50
+
+binary_sensor:
+  - platform: trend
+    sensors:
+      badet_luftfuktighet:
+        entity_id: sensor.badet_luftfuktighet
+        device_class: moisture
+        friendly_name: Showered
+        sample_duration: 600
+        min_gradient: 0.022
+

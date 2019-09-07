@@ -1,0 +1,13 @@
+sensor:
+  - platform: efergy
+    app_token: !secret efergy_token
+    utc_offset: +2
+    monitored_variables:
+      - type: instant_readings
+      - type: budget
+      - type: cost
+        period: day
+        currency: NOK
+      - type: amount
+        period: day
+      - type: current_values

@@ -1,0 +1,4 @@
+# light:
+#   - platform: switch
+#     name: Vitrineskap
+#     entity_id: switch.telldus_vitrineskap

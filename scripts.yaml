@@ -1,0 +1,8 @@
+media_extractor_test:
+  alias: Media Extractor Test
+  sequence:
+    - service: media_extractor.play_media
+      entity_id: media_player.get_box
+      data:
+        media_content_id: "https://www.youtube.com/watch?v=L7a9oaIDjkE?vq=hd720"
+        media_content_type: video/youtube

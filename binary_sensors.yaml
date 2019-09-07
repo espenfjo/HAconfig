@@ -1,0 +1,9 @@
+- platform: template
+  sensors:
+    dishwasher:
+      friendly_name: "Oppvaskmaskin aktiv"
+      device_class: power
+      delay_off:
+        minutes: 5
+      value_template: "{{ ( states('sensor.telldus_oppvaskmaskin_power') | float ) > 5 }}"
+  

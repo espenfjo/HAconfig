@@ -1,0 +1,61 @@
+cast:
+  media_player:
+    - host: 192.168.1.202
+    - host: 192.168.1.67
+    - host: 192.168.1.200
+tts:
+  - platform: google_translate
+    service_name: google_say
+# googlehome:
+#   devices:
+#     - host: 192.168.1.202
+google_assistant:
+  project_id: !secret google_assisstant_project
+  api_key: !secret google_api_key
+  exposed_domains:
+    - switch
+    - light
+    - lock
+    - sensor
+    - climate
+  entity_config:
+    sensor.badet_temperatur:
+      name: Bathroom temperature
+      room: Bathroom
+    sensor.stua_temperatur:
+      name: Livingroom temperature
+      room: Livingroom
+    sensor.netatmo_outdoor_module_temperature:
+      name: Balcony tmperature
+      room: Balcony
+    light.hjornet:
+      name: Corner
+      room: Livingroom
+    light.papirlampe1:
+      name: Paperlamp 1
+      room: Livingroom
+    light.papirlampe2:
+      name: Paperlamp 2
+      room: Livingroom
+    light.sofalampe:
+      name: Sofa Lamp
+      room: Livingroom
+    light.lightstrip:
+      name: Light Strip
+      room: Livingroom
+    lock.dor:
+      name: Door
+      room: Hallway
+    binary_sensor.dora_i_gangen:
+      name: Door
+      room: Hallway
+    binary_sensor.balkongdora:
+      name: Balcony Door
+      room: Livingroom
+    group.all_lights:
+      name: All lights
+      
+    
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
